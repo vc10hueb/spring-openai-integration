@@ -1,0 +1,14 @@
+FROM gradle:jdk21-ubi
+
+WORKDIR /app
+
+COPY . .
+
+EXPOSE 8080
+EXPOSE 8004
+
+
+CMD ["gradle", "bootRun", "-Dorg.gradle.debug=true --no-daemon", \
+    "-Dspring-boot.run.profiles=dev", \
+    "-Dspring.devtools.restart.enabled=true", \
+    "-Dspring.devtools.livereload.enabled=true"]

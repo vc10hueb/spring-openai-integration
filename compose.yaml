@@ -1,0 +1,18 @@
+services:
+  api:
+    build:
+      dockerfile: Dockerfile-dev
+    image: api_image
+    environment:
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      BASIC_AUTH_USERNAME: ${BASIC_AUTH_USERNAME}
+      BASIC_AUTH_PASSWORD: ${BASIC_AUTH_PASSWORD}
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+    ports:
+      - "8080:8080"
+      - "8000:8000"
+    container_name: api
